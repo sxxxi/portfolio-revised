@@ -1,4 +1,9 @@
 :root {
+  --bg: #181819;
+  --primary: #f5ba00;  
+
+
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -87,12 +92,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--bg);
 }
 
 a {
@@ -100,8 +100,47 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+h4 {
+  font-size: 1.6em;
+}
+
+h5 {
+  font-size: 1.3em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+p {
+  font-size: 1.2em;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+/* Page block globals */
+.pageBlockContainer {
+  padding: 16px; 
+}
+
+@media screen and (min-width: 500px) {
+  .pageBlockContainer {
+    padding: 56px; 
   }
 }

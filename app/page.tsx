@@ -1,95 +1,95 @@
-import Image from 'next/image'
+"use client"
+import chipi from '../public/img/chipi.jpg'
+import traf from '../public/img/traf.jpg'
 import styles from './page.module.css'
+import { ReactNode } from 'react'
+import Hero from './components/pageBlocks/hero/hero'
+import ImageLeftBlock from './components/pageBlocks/imageLeftBlock/imageLeftBlock'
+import ColumnText from './components/pageBlocks/columnText/columnText'
+import Projects from './components/pageBlocks/projects/projects'
+
+const content = {
+  about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem. Suspendisse dignissim erat nibh, in eleifend enim tincidunt eget. Suspendisse potenti. Aenean sollicitudin nulla in diam faucibus finibus. Nulla eget velit at elit fermentum faucibus. Sed a aliquet dui, vitae ultricies neque. " ,
+  skills: [
+    "Java", "Kotlin", "Rust", 
+  ],
+  projects: [
+    {
+      name: "Project 1",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem. Suspendisse dignissim erat nibh, in eleifend enim tincidunt eget. Suspendisse potenti. Aenean sollicitudin nulla in diam faucibus finibus. Nulla eget velit at elit fermentum faucibus. Sed a aliquet dui, vitae ultricies neque. " ,
+      image: chipi
+    }
+  ]
+}
 
 export default function Home() {
+
+
+  function Section({title, content}: {title: string, content: ReactNode}) {
+    return <section id={title} className={styles.section}>
+      <h2 className={styles.title}>{title}</h2>
+      <p>
+        {content}
+      </p>
+    </section>
+
+  }
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+      {/* Header */}
+      
+      <Hero
+        imageSrc={chipi}
+        texts={
+          <>
+            <h1>Seiji Akakabe</h1>
+            <p>Morbi accumsan lorem sed varius sagittis.</p>
+          </>
+        } 
+        buttons={
+          <>
+            <button>Button 1</button>
+            <button>Button 2</button>
+          </>
+        }
+      />
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <ColumnText 
+        title={"About"}
+        body={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor felis in mauris feugiat iaculis. Donec at fermentum ante. Morbi accumsan lorem sed varius sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor felis in mauris feugiat iaculis. Donec at fermentum ante. Morbi accumsan lorem sed varius sagittis"}
+      />
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <ImageLeftBlock
+        imageSrc={traf}
+        title={"Education"}
+        content={
+          <>
+            <h3>Sheridan College</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor felis in mauris feugiat iaculis. 
+              Donec at fermentum ante. Morbi accumsan lorem sed varius sagittis. Lorem ipsum dolor sit amet, consectetur 
+              adipiscing elit. Aliquam auctor felis in mauris feugiat iaculis. Donec at fermentum ante. 
+              Morbi accumsan lorem sed varius sagittis.</p>
+          </>
+        }
+      />
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+      <Projects content={content.projects}></Projects>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      {/* <Section
+        title='Projects'
+        content={
+          content.projects.map(p => {
+            return <ProjectCard name={p.name} description={p.description} />
+          })
+        }
+      /> */}
+
     </main>
   )
 }
+
+
+
+

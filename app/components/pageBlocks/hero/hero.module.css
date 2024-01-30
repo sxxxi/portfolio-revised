@@ -1,0 +1,57 @@
+.hero {
+  display: flex;
+  align-items: flex-end;
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+}
+
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  z-index: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 56px;
+  z-index: 1;
+}
+
+.texts {
+ flex-grow: 1;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.buttons button {
+  border-radius: 3px;
+  margin-top: 16px;
+  padding: 12px;  
+  border-width: 0px;
+  outline: 0px;
+  background-color: chocolate;
+  color: white;
+}
+
+@media(min-width: 500px) {
+  .hero {
+    display: flex;
+    align-items: flex-end;
+    height: 400px;
+  }
+
+  .hero h1 {
+    font-size: 5em;
+  }  
+
+  .container {
+  }
+}
