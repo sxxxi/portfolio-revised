@@ -1,18 +1,24 @@
 .container {
-  margin: 8px;
   position: relative;
-  background-color: rgb(19, 23, 27);
   border-radius: 8px;
   overflow: hidden;
+
+  /* background-color: rgb(19, 23, 27, 0.3); */
+  background-color: #363636cc;
+  border-radius: 16px;
+  box-shadow: 2px 2px 8px rgba(1, 1, 1, 0.5 );
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .projectCard {
   display: flex;
   align-items: center;
-  width: auto;
+  width: 100%;
   aspect-ratio: 7/2;
   height: fit-content;
   flex-direction: row;
+  padding: 24px;
 }
 
 .projectCard .contents {
@@ -30,6 +36,8 @@
   height: 100%; 
   overflow: hidden;
   box-shadow: 20px;
+  position: relative;
+  border-radius: 8px;
 }
 
 .closeButton {

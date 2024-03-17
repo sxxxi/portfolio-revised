@@ -1,16 +1,20 @@
-import Image, { StaticImageData } from 'next/image'
+import { StaticImageData } from 'next/image'
 import styles from './imageLeftBlock.module.css'
 import { ReactNode } from 'react'
+import { Image } from '@chakra-ui/react'
+import PageBlock from '../../pageBlock/PageBlock'
 
 interface ImageLeftBlockProps {
-  imageSrc: StaticImageData
+  imageSrc?: string
+  alt?: string,
   title: string,
   content: ReactNode
 }
 
-export default function ImageLeftBlock({ imageSrc, title, content }: ImageLeftBlockProps) {
+export default function ImageLeftBlock({ imageSrc, title, content, alt }: ImageLeftBlockProps) {
   return <>
-    <div className={`pageBlockContainer ${styles.about}`}>
+    <PageBlock className={styles.about}>
+    {/* <div className={`pageBlockContainer ${styles.about}`}> */}
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         {content}
@@ -19,10 +23,9 @@ export default function ImageLeftBlock({ imageSrc, title, content }: ImageLeftBl
         <Image
           className={styles.image}
           src={imageSrc}
-          alt={""}
-          layout="responsive"
+          alt={alt}
         />
       </div>
-    </div> 
+  </PageBlock>
   </>
 }

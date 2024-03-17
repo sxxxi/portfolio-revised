@@ -7,19 +7,28 @@ import Hero from './components/pageBlocks/hero/hero'
 import ImageLeftBlock from './components/pageBlocks/imageLeftBlock/imageLeftBlock'
 import ColumnText from './components/pageBlocks/columnText/columnText'
 import Projects from './components/pageBlocks/projects/projects'
+import { ProjectCardProps } from './components/pageBlocks/projects/project/projectCard'
+import PageBlock from './components/pageBlock/PageBlock'
+import { Heading } from '@chakra-ui/react'
+import IconButton from './components/IconButton/IconButton'
 
 const content = {
-  about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem. Suspendisse dignissim erat nibh, in eleifend enim tincidunt eget. Suspendisse potenti. Aenean sollicitudin nulla in diam faucibus finibus. Nulla eget velit at elit fermentum faucibus. Sed a aliquet dui, vitae ultricies neque. " ,
+  about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem.",
   skills: [
     "Java", "Kotlin", "Rust", 
   ],
   projects: [
     {
       name: "Project 1",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      imageSrc: '/img/chipi.jpg'
+    },
+    {
+      name: "Project 1",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem. Suspendisse dignissim erat nibh, in eleifend enim tincidunt eget. Suspendisse potenti. Aenean sollicitudin nulla in diam faucibus finibus. Nulla eget velit at elit fermentum faucibus. Sed a aliquet dui, vitae ultricies neque. " ,
-      image: chipi
+      imageSrc: '/img/chipi.jpg'
     }
-  ]
+  ] as ProjectCardProps[]
 }
 
 export default function Home() {
@@ -32,14 +41,12 @@ export default function Home() {
         {content}
       </p>
     </section>
-
   }
 
   return (
     <main className={styles.main}>
-      {/* Header */}
-      
       <Hero
+        bgSrc='/img/chipi.jpg'
         imageSrc={chipi}
         texts={
           <>
@@ -61,7 +68,7 @@ export default function Home() {
       />
 
       <ImageLeftBlock
-        imageSrc={traf}
+        imageSrc='/img/traf.jpg'
         title={"Education"}
         content={
           <>
@@ -74,17 +81,14 @@ export default function Home() {
         }
       />
 
+      <Projects containerBgSrc={'/img/mountain.webp'} content={content.projects}></Projects>
 
-      <Projects content={content.projects}></Projects>
-
-      {/* <Section
-        title='Projects'
-        content={
-          content.projects.map(p => {
-            return <ProjectCard name={p.name} description={p.description} />
-          })
-        }
-      /> */}
+      <PageBlock
+        bgSrc='/img/chipi.jpg'
+        bgSize='cover'
+      >
+        <Heading size={'4xl'}>Contact</Heading>
+      </PageBlock>
 
     </main>
   )

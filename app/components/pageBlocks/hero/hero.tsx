@@ -1,24 +1,19 @@
 import { ReactNode } from "react"
 import Image, { StaticImageData } from "next/image"
 import styles from "./hero.module.css"
+import PageBlock from "../../pageBlock/PageBlock"
 
 interface HeroProps {
   imageSrc: StaticImageData,
+  bgSrc?: string,
   texts: ReactNode
   buttons: ReactNode
 }
 
-export default function Hero({ imageSrc, texts, buttons }: HeroProps) {
+export default function Hero({ texts, buttons, bgSrc }: HeroProps) {
   return <>
-    <div
-      className={styles.hero}
-      style={{
-        backgroundImage: `url(${imageSrc.src})`,
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <PageBlock className={styles.hero} bgSrc={bgSrc} padding={'0'}>
       <div className={styles.gradient} />
-      
       <div className={`pageBlockContainer ${styles.container}`}>
         <div className={styles.texts}>
           {texts}
@@ -27,6 +22,6 @@ export default function Hero({ imageSrc, texts, buttons }: HeroProps) {
           {buttons}
         </div>
       </div>
-    </div>
+    </PageBlock>
   </>
 }

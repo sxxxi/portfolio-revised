@@ -4,11 +4,11 @@ import { ReactNode, useState } from 'react';
 
 export interface ProjectCardProps {
   name: string,
-  description: string,
-  image: StaticImageData
+  description: string | undefined,
+  imageSrc?: string,
 }
 
-export default function ProjectCard({ name, description, image }: ProjectCardProps) {
+export default function ProjectCard({ name, description, imageSrc }: ProjectCardProps) {
   const [toggled, setToggled] = useState(false)
 
   function contentsNotToggled() {
@@ -20,13 +20,17 @@ export default function ProjectCard({ name, description, image }: ProjectCardPro
         <h3>{name}</h3>
         <p>{description}</p>
       </div>
-      <div className={styles.images}>
-        <Image
-          style={{ objectFit: "cover" }}
-          src={image}
-          alt=""
-        /> 
-      </div>
+
+      {
+        (imageSrc)? <div className={styles.images}>
+          <Image
+            style={{ objectFit: "cover" }}
+            fill={true}
+            src={imageSrc}
+            alt=""
+          />  
+        </div> : <></>
+      }
     </div>
   }
 
