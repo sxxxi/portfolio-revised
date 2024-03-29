@@ -4,5 +4,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm ci
 COPY . .
-RUN npm run dev
+RUN npm run build
+ENTRYPOINT npm run dev
+
 

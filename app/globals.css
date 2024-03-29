@@ -1,6 +1,19 @@
 :root {
   --bg: #181819;
   --primary: #f5ba00;  
+  --borderRadiusSmall: 8px;
+
+
+
+  --xs: 8px;
+  --s: 16px;
+  --m: 24px;
+  --l: 32px;
+  --xl: 40px;
+  --2xl: 48px;
+  --3xl: 56px;
+  --4xl: 64px;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,11 +79,11 @@ p {
 
 /* Page block globals */
 .pageBlockContainer {
-  padding: 16px; 
+  padding: var(--s); 
 }
 
 @media screen and (min-width: 500px) {
   .pageBlockContainer {
-    padding: 64px 56px; 
+    padding: var(--4xl) var(--3xl); 
   }
 }

@@ -1,73 +1,53 @@
-.container {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-
-  /* background-color: rgb(19, 23, 27, 0.3); */
+.glass {
   background-color: #363636cc;
-  border-radius: 16px;
   box-shadow: 2px 2px 8px rgba(1, 1, 1, 0.5 );
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(var(--s));
+  -webkit-backdrop-filter: blur(var(--s));
+
 }
 
-.projectCard {
+.container {
   display: flex;
-  align-items: center;
-  width: 100%;
-  aspect-ratio: 7/2;
-  height: fit-content;
   flex-direction: row;
-  padding: 24px;
-}
-
-.projectCard .contents {
-  /* display: flex; */
-  /* flex-direction: column;
-  justify-content: center; */
-  padding: 32px;
-  width: 60%;
-  overflow: scroll;
-  /* transition: padding 1s ease-out; */
-}
-
-.projectCard > .images {
-  width: 40%;
-  height: 100%; 
+  border-radius: var(--xs);
   overflow: hidden;
-  box-shadow: 20px;
-  position: relative;
-  border-radius: 8px;
+  width: 100%;
+  padding: var(--m);
+  gap: var(--m);
+  max-width: 1000px;
 }
 
-.closeButton {
-  position: absolute;
-  right: 0;
-  margin: 16px;
-}
-
-.secondForm {
+.container .contents {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 16px 64px;
+  justify-content: center;
+  width: 70%;
+  padding: var(--l);
+  word-break: normal;
 }
 
-.demoVideo {
-  border-radius: 8px;
-  border: 0;
-  margin: 16px;
+.container .images {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  width: 30%;
+  border-radius: var(--xs);
 }
 
-.toggleSection {
-  width: 100%;
-  margin: 16px 0px;
+@media(max-width: 1200px) {
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+
+  }
+  .container .contents {
+    width: 100%;
+    padding: var(--xs);
+  }
+  .container .images {
+    aspect-ratio: 3/1;
+    width: 100%;
+  }
+
 }
 
-.toggleSection .toggleTitle {
-  margin: 8px 0px;
-}
-
-.toggleSection .toggleContent {
-  padding-left: 8px;
-}
