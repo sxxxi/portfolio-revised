@@ -1,6 +1,8 @@
+'use client';
 import styles from './projectCard.module.css'
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { ReactNode, useState } from 'react';
+import { Project } from '../projects';
 
 export interface ProjectCardProps {
   name: string,
@@ -8,25 +10,25 @@ export interface ProjectCardProps {
   imageSrc?: string,
 }
 
-export default function ProjectCard({ name, description, imageSrc }: ProjectCardProps) {
+export default function ProjectCard({title, description, imageLinks}: Project) {
   const [toggled, setToggled] = useState(false)
 
   function contentsNotToggled() {
     return <div
-      className={`${styles.container} ${styles.projectCard}`}
+      className={`${styles.container} ${styles.projectCard} ${styles.glass}`}
       onClick={_ => setToggled(true)}
     >
       <div className={styles.contents}>
-        <h3>{name}</h3>
+        <h3>{title}</h3>
         <p>{description}</p>
       </div>
 
       {
-        (imageSrc)? <div className={styles.images}>
+        (imageLinks && imageLinks.length > 0)? <div className={styles.images}>
           <Image
             style={{ objectFit: "cover" }}
             fill={true}
-            src={imageSrc}
+            src={imageLinks[0]}
             alt=""
           />  
         </div> : <></>

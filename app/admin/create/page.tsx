@@ -1,26 +1,32 @@
 "use client"
-import { ChangeEvent, ChangeEventHandler, FormEvent, useState } from "react";
+import JwtService from "@/app/service/jwt.service";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect, useState } from "react";
 
 
 interface ProjectPack {
   title: string,
-  description: string
-}
-
-const initial: ProjectPack = {
-  title: "",
-  description: ""
+  description: string,
+  images: File[]
 }
 
 export default function ProjectCreatePage() {
-  const [formData, setFormData] = useState(new FormData());
+  const {push} = useRouter()
+  const [formData, setFormData] = useState(new FormData())
   const [image, setImage] = useState<File>()
   const [project, setProject] = useState<ProjectPack>(
     {
       title: "",
-      description: ""
+      description: "",
+      images: []
     }
   )
+
+  useEffect(() => {
+    JwtService.getToken(() => {push('/auth/login')})
+  }, [])
+
+
   const onImageSelect = (event: FormEvent<HTMLInputElement>) => {
     const newImage = event.currentTarget.files?.[0]
     if (newImage != null) {
@@ -32,15 +38,16 @@ export default function ProjectCreatePage() {
   const uploadImage = () => { 
     formData.append('project', JSON.stringify(project))
     if (image) {
-      formData.append('image', image)
+      formData.append('images', image)
     }
+    console.log('appended image', formData.get('images'))
 
-    fetch("http://localhost:8080/proto/media", {
+    fetch("http://localhost:8080/portfolio/projects", {
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": "*"
+        'Authorization': `Bearer ${sessionStorage.getItem('sxxxi-token')}`  
       },
-      body: formData
+      body: formData,
     })
     .then(res => console.log(res))
     .catch(err => console.error(err))
@@ -52,6 +59,8 @@ export default function ProjectCreatePage() {
       ...project,
       [event.currentTarget.name]: event.currentTarget.value,
     });
+    formData.set(event.currentTarget.name, event.currentTarget.value)
+    console.log(formData)
   }
 
   return <>

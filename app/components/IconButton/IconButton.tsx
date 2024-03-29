@@ -1,10 +1,13 @@
 import { AspectRatio, Button, Icon, Image } from "@chakra-ui/react";
 
-export default function IconButton() {
-  return <AspectRatio ratio={1}>
-    <Button bg={''}>
-      <Image boxSize={'300'} src='/img/github-mark-white.svg' />
-    </Button>
-  </AspectRatio>
-  
+interface IconButtonProps {
+  icon: string,
+  href?: string,
+  width?: number
+}
+
+export default function IconButton({ icon, width, href }: IconButtonProps) {
+  return <a href={href} target="blank">
+    <Image src={icon} width={(width) ? width : 60} />
+  </a>
 }

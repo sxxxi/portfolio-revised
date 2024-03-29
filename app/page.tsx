@@ -1,66 +1,59 @@
-"use client"
-import chipi from '../public/img/chipi.jpg'
-import traf from '../public/img/traf.jpg'
+'use client';
 import styles from './page.module.css'
-import { ReactNode } from 'react'
 import Hero from './components/pageBlocks/hero/hero'
 import ImageLeftBlock from './components/pageBlocks/imageLeftBlock/imageLeftBlock'
 import ColumnText from './components/pageBlocks/columnText/columnText'
-import Projects from './components/pageBlocks/projects/projects'
+import Projects, { Project } from './components/pageBlocks/projects/projects'
 import { ProjectCardProps } from './components/pageBlocks/projects/project/projectCard'
 import PageBlock from './components/pageBlock/PageBlock'
 import { Heading } from '@chakra-ui/react'
-import IconButton from './components/IconButton/IconButton'
+import { useEffect, useState } from 'react';
+import JwtService from './service/jwt.service';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import IconButton from './components/IconButton/IconButton';
 
 const content = {
   about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem.",
   skills: [
     "Java", "Kotlin", "Rust", 
-  ],
-  projects: [
-    {
-      name: "Project 1",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      imageSrc: '/img/chipi.jpg'
-    },
-    {
-      name: "Project 1",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem. Suspendisse dignissim erat nibh, in eleifend enim tincidunt eget. Suspendisse potenti. Aenean sollicitudin nulla in diam faucibus finibus. Nulla eget velit at elit fermentum faucibus. Sed a aliquet dui, vitae ultricies neque. " ,
-      imageSrc: '/img/chipi.jpg'
-    }
-  ] as ProjectCardProps[]
+  ]
 }
 
+const DOMAIN = process.env['API'] || 'http://localhost:8080'
+
 export default function Home() {
+  const {push} = useRouter()
+  const [projects, setProjects] = useState([])  
 
+  useEffect(() => {
+    fetch(`${DOMAIN}/portfolio/projects`).then(res => 
+      res.json()
+    ).then(data => {
+      setProjects(data.projects)
+    }).catch(err => {
+      setProjects([])
+      console.log(err);
+    })
+  }, [])
 
-  function Section({title, content}: {title: string, content: ReactNode}) {
-    return <section id={title} className={styles.section}>
-      <h2 className={styles.title}>{title}</h2>
-      <p>
-        {content}
-      </p>
-    </section>
-  }
+  useEffect(() => {
+    console.log(projects)
+  }, [projects])
 
   return (
     <main className={styles.main}>
       <Hero
-        bgSrc='/img/chipi.jpg'
-        imageSrc={chipi}
-        texts={
-          <>
-            <h1>Seiji Akakabe</h1>
-            <p>Morbi accumsan lorem sed varius sagittis.</p>
-          </>
-        } 
+        // bgSrc='/img/chipi.jpg'
         buttons={
           <>
-            <button>Button 1</button>
-            <button>Button 2</button>
+            <IconButton icon='/img/github-mark-white.svg' href='https://github.com/sxxxi' width={40}></IconButton>
+            <IconButton icon='/img/linkedin.png' href='https://www.linkedin.com/in/seiji-akakabe' width={50}></IconButton>
           </>
-        }
-      />
+        }>
+        <h1>Seiji Akakabe</h1>
+        <h3>Software Developer</h3>
+      </Hero>
 
       <ColumnText 
         title={"About"}
@@ -81,15 +74,16 @@ export default function Home() {
         }
       />
 
-      <Projects containerBgSrc={'/img/mountain.webp'} content={content.projects}></Projects>
+      <Projects containerBgSrc={'/img/mountain.webp'} content={projects}></Projects>
 
       <PageBlock
-        bgSrc='/img/chipi.jpg'
-        bgSize='cover'
+        // bgSrc='/img/chipi.jpg'
+        // bgSize='cover'
       >
-        <Heading size={'4xl'}>Contact</Heading>
+        <h2>Contact</h2> 
+         <a type='email' href='mailto:akakabeseiji0@gmail.com'>akakabeseiji0@gmail.com</a><br></br>
+        <Link href={'/admin/create'}>Admin Dashboard</Link>
       </PageBlock>
-
     </main>
   )
 }

@@ -4,6 +4,8 @@
   background-position: center;
   background-size: cover;
   height: 400px;
+   background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(20,19,52,1) 50%, rgba(43,25,0,1) 100%); 
 }
 
 .gradient {
@@ -28,7 +30,9 @@
 
 .buttons {
   display: flex;
-  gap: 16px;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--m);
 }
 
 .buttons button {
