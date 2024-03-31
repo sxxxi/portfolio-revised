@@ -2,13 +2,8 @@
 import JwtService from "@/app/service/jwt.service";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect, useState } from "react";
+import ProjectPack from "@/pages/api/projects/project-pack.model";
 
-
-interface ProjectPack {
-  title: string,
-  description: string,
-  images: File[]
-}
 
 export default function ProjectCreatePage() {
   const {push} = useRouter()
@@ -42,7 +37,7 @@ export default function ProjectCreatePage() {
     }
     console.log('appended image', formData.get('images'))
 
-    fetch("http://localhost:8080/portfolio/projects", {
+    fetch("/api/projects/add", {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${sessionStorage.getItem('sxxxi-token')}`  
