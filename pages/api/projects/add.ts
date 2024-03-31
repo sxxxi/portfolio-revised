@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next"
+import { DOMAIN } from "../variables"
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method == 'POST') {
-    fetch("http://localhost:8080/portfolio/projects", {
+    fetch(`${DOMAIN}/portfolio/projects`, {
       method: "POST",
       body: req.body,
       headers: {

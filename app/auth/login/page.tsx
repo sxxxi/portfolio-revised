@@ -21,7 +21,7 @@ export default function Login() {
       res.json()
     ).then(data => {
       sessionStorage.setItem('sxxxi-token', data.token);
-      back();
+      push('/admin/create');
     })
   }
 

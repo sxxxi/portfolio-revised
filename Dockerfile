@@ -38,5 +38,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
+ENV DOMAIN http://portfolio-server
 
 CMD HOSTNAME="0.0.0.0" node server.js

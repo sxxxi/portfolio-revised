@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { DOMAIN } from "../variables";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method == 'POST') {
     // Consume username and password, garble out the token
     const { username, password } = JSON.parse(req.body)
   
-    fetch('http://localhost:8080/auth/login', {
+    fetch(`${DOMAIN}/auth/login`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
