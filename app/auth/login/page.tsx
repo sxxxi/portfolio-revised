@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import styles from './Login.module.css';
+import CenterStage from "@/app/components/centerStage/CenterStage";
 
 export default function Login() {
   const [uname, setUname] = useState('');
@@ -21,17 +21,16 @@ export default function Login() {
       res.json()
     ).then(data => {
       sessionStorage.setItem('sxxxi-token', data.token);
+      back();
     })
   }
 
   return <>
-    <div className={`${styles.fullscreen}`}>
-      <div className={`${styles.form}`}>
+    <CenterStage>
         <h2>Login</h2>
         <input placeholder="Username" type="text" value={uname} onChange={e => setUname(e.currentTarget.value)}/>
         <input placeholder="Password" type="password" value={pass} onChange={e => setPass(e.currentTarget.value)}/>
         <input type="button" value={'Login'} onClick={onLoginRequest} />
-      </div>
-    </div>
+    </CenterStage>
   </>
 }

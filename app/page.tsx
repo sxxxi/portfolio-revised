@@ -13,13 +13,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import IconButton from './components/IconButton/IconButton';
 
-const content = {
-  about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus vel magna et aliquet. Vivamus non tortor condimentum, malesuada velit quis, scelerisque lorem.",
-  skills: [
-    "Java", "Kotlin", "Rust", 
-  ]
-}
-
 const DOMAIN = process.env['API'] || 'http://localhost:8080'
 
 export default function Home() {
@@ -27,7 +20,7 @@ export default function Home() {
   const [projects, setProjects] = useState([])  
 
   useEffect(() => {
-    fetch(`${DOMAIN}/portfolio/projects`).then(res => 
+    fetch('/api/projects/get-all').then(res =>
       res.json()
     ).then(data => {
       setProjects(data.projects)

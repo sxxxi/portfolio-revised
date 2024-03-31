@@ -3,6 +3,7 @@ import JwtService from "@/app/service/jwt.service";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect, useState } from "react";
 import ProjectPack from "@/pages/api/projects/project-pack.model";
+import CenterStage from "@/app/components/centerStage/CenterStage";
 
 
 export default function ProjectCreatePage() {
@@ -35,7 +36,6 @@ export default function ProjectCreatePage() {
     if (image) {
       formData.append('images', image)
     }
-    console.log('appended image', formData.get('images'))
 
     fetch("/api/projects/add", {
       method: "POST",
@@ -43,10 +43,14 @@ export default function ProjectCreatePage() {
         'Authorization': `Bearer ${sessionStorage.getItem('sxxxi-token')}`  
       },
       body: formData,
+    }).then(res => {
+      console.log(res)
+      if (res.status == 200) {
+        push('/')
+      }
+    }).finally(() => {
+      setFormData(new FormData())
     })
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
-    .finally(() => {setFormData(new FormData())})
   }
 
   const updateProject = (event: FormEvent<HTMLInputElement>) => {
@@ -59,9 +63,12 @@ export default function ProjectCreatePage() {
   }
 
   return <>
-    <input type="text" name="title" value={project.title} onChange={updateProject} />
-    <input type="text" name="description" value={project.description} onChange={updateProject} />
-    <input type="file" name="image" onChange={onImageSelect} />
-    <input type="submit" title="Submit" onClick={uploadImage}/>
+    <CenterStage>
+      <h2>New Project</h2>
+      <input placeholder="Title" type="text" name="title" value={project.title} onChange={updateProject} />
+      <input placeholder="Description" type="text" name="description" value={project.description} onChange={updateProject} />
+      <input placeholder="Images" type="file" name="image" onChange={onImageSelect} />
+      <input type="submit" title="Submit" onClick={uploadImage}/>
+    </CenterStage>
   </>
 }

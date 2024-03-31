@@ -1,6 +1,4 @@
-import { Box, Center, Container } from "@chakra-ui/react"
-
-
+import { Center, Container } from "@chakra-ui/react"
 
 interface PageBlockProps {
   children?: React.ReactNode,

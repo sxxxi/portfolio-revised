@@ -9,8 +9,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         'Content-Type': req.headers['content-type'] as string,
         'Authorization': req.headers['authorization'] as string
       }
-    }).then(() => {
-      res.status(200)
-    })
+    }).then(response => 
+      response.json() 
+    ).then(data => 
+      res.status(200).send(data)
+    )
   }
 }
