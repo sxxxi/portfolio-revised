@@ -1,7 +1,7 @@
 'use client';
-import { Center, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import CenterStage from "@/app/components/centerStage/CenterStage";
 
 export default function Login() {
   const [uname, setUname] = useState('');
@@ -21,14 +21,16 @@ export default function Login() {
       res.json()
     ).then(data => {
       sessionStorage.setItem('sxxxi-token', data.token);
+      back();
     })
   }
 
-  return <Center>
-    <VStack>
-      <input type="text" value={uname} onChange={e => setUname(e.currentTarget.value)}/>
-      <input type="password" value={pass} onChange={e => setPass(e.currentTarget.value)}/>
-      <input type="button" value={'Login'} onClick={onLoginRequest} />
-    </VStack>
-  </Center>
+  return <>
+    <CenterStage>
+        <h2>Login</h2>
+        <input placeholder="Username" type="text" value={uname} onChange={e => setUname(e.currentTarget.value)}/>
+        <input placeholder="Password" type="password" value={pass} onChange={e => setPass(e.currentTarget.value)}/>
+        <input type="button" value={'Login'} onClick={onLoginRequest} />
+    </CenterStage>
+  </>
 }

@@ -4,7 +4,7 @@
   --borderRadiusSmall: 8px;
 
 
-
+  --xxs:4px;
   --xs: 8px;
   --s: 16px;
   --m: 24px;
@@ -86,4 +86,18 @@ p {
   .pageBlockContainer {
     padding: var(--4xl) var(--3xl); 
   }
+}
+
+input[type="button"], input[type="submit"] {
+  padding: var(--xs);
+  background-color: var(--primary);
+  color: var(--bg);
+  border: #FFFFFF00 solid 1px;
+  border-radius: var(--xxs);
+}
+
+input[type="button"]:hover, input[type="submit"]:hover {
+  background-color: var(--bg);
+  border: var(--primary) solid 1px;
+  color: var(--primary);
 }
