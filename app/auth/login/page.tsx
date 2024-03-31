@@ -1,5 +1,5 @@
 'use client';
-import { Box, Button, Center, VStack } from "@chakra-ui/react";
+import { Center, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,12 +11,8 @@ export default function Login() {
   function onLoginRequest() {
     if (!(uname && pass)) {return}
 
-    fetch('http://localhost:8080/auth/login', {
+    fetch('/api/auth/login', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         username: uname,
         password: pass
@@ -24,13 +20,9 @@ export default function Login() {
     }).then(res => 
       res.json()
     ).then(data => {
-      let token = (data as { token: string }).token
-      sessionStorage.setItem('sxxxi-token', token);
-      console.log(token)
-      back()
+      sessionStorage.setItem('sxxxi-token', data.token);
     })
   }
-
 
   return <Center>
     <VStack>
