@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect, useState } from "react";
 import ProjectPack from "@/pages/api/projects/project-pack.model";
 import CenterStage from "@/app/components/centerStage/CenterStage";
+import { DOMAIN } from "@/pages/api/variables";
 
 
 export default function ProjectCreatePage() {
@@ -32,24 +33,23 @@ export default function ProjectCreatePage() {
   }
 
   const uploadImage = () => { 
-    formData.append('project', JSON.stringify(project))
     if (image) {
       formData.append('images', image)
     }
 
+    console.log(formData.get('images'))
+
     fetch("/api/projects/add", {
       method: "POST",
       headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem('sxxxi-token')}`  
+        'Authorization': `Bearer ${sessionStorage.getItem('sxxxi-token')}`,
       },
-      body: formData,
+      body: formData
     }).then(res => {
       console.log(res)
       if (res.status == 200) {
         push('/')
       }
-    }).finally(() => {
-      setFormData(new FormData())
     })
   }
 
@@ -59,7 +59,6 @@ export default function ProjectCreatePage() {
       [event.currentTarget.name]: event.currentTarget.value,
     });
     formData.set(event.currentTarget.name, event.currentTarget.value)
-    console.log(formData)
   }
 
   return <>

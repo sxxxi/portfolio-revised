@@ -27,17 +27,18 @@ COPY --from=builder /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
+USER nextjs
+EXPOSE 3000
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-USER nextjs
-
-EXPOSE 3000
-
 ENV PORT 3000
-ENV DOMAIN http://portfolio-server
+ENV DOMAIN http://portfolio-server:8080
 
-CMD HOSTNAME="0.0.0.0" node server.js
+ENV NEXT_SHARP_PATH=/tmp/node_modules/sharp
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]

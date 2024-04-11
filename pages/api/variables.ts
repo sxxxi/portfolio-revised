@@ -1,1 +1,1 @@
-export let DOMAIN = process.env['DOMAIN'];
+export let DOMAIN = process.env.DOMAIN;
