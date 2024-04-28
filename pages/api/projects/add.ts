@@ -11,6 +11,7 @@ export const config = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method == 'POST') {
+  
     const formData: FormData = await new Promise((resolve, reject) => {
       /*
       ⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⠀⠀⠀
@@ -46,10 +47,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         Object.keys(files).forEach(key => {
           let fileList = files[key]
           if (fileList) {
-            fileList.forEach((file, index) => {
+            fileList.forEach((file) => {
               let fileBuffer = readFileSync(file.filepath)
-              let fileBlob = new File([fileBuffer], file.originalFilename? file.originalFilename : 'whatever.txt')
-              formData.append(`${key}`, fileBlob)
+              let fileBlob = new File([fileBuffer], file.originalFilename? file.originalFilename : 'whatever.txt', { type: file.mimetype?.toString() })
+              formData.append(`${key}`, fileBlob,)
             })
           }
         })
@@ -57,17 +58,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }) 
     })
 
-    fetch(`${DOMAIN}/portfolio/projects`, {
-      method: 'POST',
+    let response = await fetch(`${DOMAIN}/portfolio/projects`, {
+      method: "POST",
       headers: {
-        'Authorization': req.headers["authorization"] as string,
+        'Authorization': req.headers['authorization'] as string
       },
-      body: formData 
-    }).then(response => {
-      if (response.status == 200) {
-        res.status(200).json({})
-      }
-      res.status(response.status).json({})
+      body: formData
     })
+    
+    res.status(response.status).send(response.body);
   }
 }

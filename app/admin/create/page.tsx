@@ -1,10 +1,9 @@
 "use client"
 import JwtService from "@/app/service/jwt.service";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, ChangeEventHandler, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import ProjectPack from "@/pages/api/projects/project-pack.model";
 import CenterStage from "@/app/components/centerStage/CenterStage";
-import { DOMAIN } from "@/pages/api/variables";
 
 
 export default function ProjectCreatePage() {
@@ -34,11 +33,10 @@ export default function ProjectCreatePage() {
 
   const uploadImage = () => { 
     if (image) {
+      formData.delete('images')
       formData.append('images', image)
     }
-
-    console.log(formData.get('images'))
-
+    
     fetch("/api/projects/add", {
       method: "POST",
       headers: {
